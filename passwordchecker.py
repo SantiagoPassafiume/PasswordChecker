@@ -4,6 +4,15 @@ import sys
 import termcolor
 
 
+def open_file(filename):
+    try:
+        with open(filename, "r") as f:
+            text = f.readlines()
+        return text
+    except FileNotFoundError:
+        termcolor.cprint(f"File could not be found.", "red")
+
+
 def request_api_data(query_chars):
     url = f"https://api.pwnedpasswords.com/range/{query_chars}"
     response = requests.get(url)
@@ -28,8 +37,9 @@ def check_password(password):
     return get_password_count(response, remaining_chars)
 
 
-def main(args):
-    for password in args:
+def main(file):
+    for password in open_file(file):
+        password = password.strip()
         count = check_password(password)
         if count:
             termcolor.cprint(f'[-] "{password}" was found {count} times.', "red")
@@ -38,4 +48,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    try:
+        sys.exit(main(sys.argv[1]))
+    except:
+        pass
