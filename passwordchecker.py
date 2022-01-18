@@ -1,4 +1,5 @@
 import requests
+import hashlib
 
 
 def request_api_data(query_chars):
@@ -11,7 +12,7 @@ def request_api_data(query_chars):
 
 
 def check_password(password):
-    pass
+    sha1_password = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()
 
 
 # request_api_data("123")
