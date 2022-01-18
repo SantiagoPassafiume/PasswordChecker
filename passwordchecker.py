@@ -1,6 +1,7 @@
 import requests
 import hashlib
 import sys
+import termcolor
 
 
 def request_api_data(query_chars):
@@ -31,9 +32,9 @@ def main(args):
     for password in args:
         count = check_password(password)
         if count:
-            print(f'"{password}" was found {count} times.')
+            termcolor.cprint(f'[-] "{password}" was found {count} times.', "red")
         else:
-            print(f'"{password}" was NOT found.')
+            termcolor.cprint(f'[+] "{password}" was NOT found.', "green")
 
 
 if __name__ == "__main__":
