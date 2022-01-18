@@ -34,3 +34,7 @@ def main(args):
             print(f'"{password}" was found {count} times.')
         else:
             print(f'"{password}" was NOT found.')
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
