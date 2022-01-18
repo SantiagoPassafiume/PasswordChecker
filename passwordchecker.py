@@ -14,7 +14,5 @@ def request_api_data(query_chars):
 def check_password(password):
     sha1_password = hashlib.sha1(password.encode("utf-8")).hexdigest().upper()
     first_5_chars, remaining_chars = sha1_password[:5], sha1_password[5:]
-    return sha1_password
-
-
-# request_api_data("123")
+    response = request_api_data(first_5_chars)
+    return response
